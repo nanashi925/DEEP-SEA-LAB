@@ -191,6 +191,61 @@ body::before {
   white-space: nowrap;
 }
 
+
+.speech-bubble {
+  position: absolute;
+  bottom: calc(100% + 18px);
+  max-width: min(220px, 64vw);
+  padding: 0.42rem 0.62rem;
+  font-size: clamp(0.74rem, 2.8vw, 0.84rem);
+  line-height: 1.35;
+  color: var(--bubble-text, #eaf4ff);
+  background: var(--bubble-bg, #1d2f54);
+  border: 1px solid rgba(238, 246, 255, 0.18);
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.34);
+  text-align: left;
+  pointer-events: none;
+  animation: bubble-pop 140ms ease-out;
+  z-index: 5;
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  width: 0;
+  height: 0;
+  border: 7px solid transparent;
+  border-top-color: var(--bubble-bg, #1d2f54);
+}
+
+.speech-anchor-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.speech-anchor-center::after {
+  left: calc(50% - 7px);
+}
+
+.speech-anchor-left {
+  left: 0;
+}
+
+.speech-anchor-left::after {
+  left: 18px;
+}
+
+.speech-anchor-right {
+  right: 0;
+}
+
+.speech-anchor-right::after {
+  right: 18px;
+}
+
+
 .dialog-panel {
   padding: 0.9rem 1rem 1.05rem;
 }
@@ -235,5 +290,14 @@ body::before {
 
   .map-stage {
     height: 60vh;
+  }
+}
+
+@keyframes bubble-pop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

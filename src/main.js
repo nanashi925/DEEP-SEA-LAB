@@ -1,3 +1,4 @@
+import { CHARACTERS, DIALOGS, FALLBACK_ASSETS, ROOMS, SPEECH_STYLES } from './world-data.js';
 import { CHARACTERS, DIALOGS, FALLBACK_ASSETS, ROOMS } from './world-data.js';
 
 const mapStage = document.getElementById('mapStage');
@@ -8,6 +9,12 @@ const menuButtons = [...document.querySelectorAll('.menu-button')];
 const brandSub = document.querySelector('.brand-sub');
 const logo = document.querySelector('.logo');
 
+const baseUrl = import.meta?.env?.BASE_URL ?? '/';
+
+let activeRoom = 'living';
+let activeBubble = null;
+let bubbleTimer = null;
+const lastSpeechByCharacter = new Map();
 let activeRoom = 'living';
 
 function setDialogue(name, lines) {
@@ -38,6 +45,61 @@ function applyRoomBackground(room) {
   candidate.src = room.background;
 }
 
+function clearBubble() {
+  if (bubbleTimer) {
+    clearTimeout(bubbleTimer);
+    bubbleTimer = null;
+  }
+
+  if (activeBubble) {
+    activeBubble.remove();
+    activeBubble = null;
+  }
+}
+
+function chooseSpeech(characterId, lines) {
+  if (lines.length <= 1) return lines[0] ?? '';
+
+  const lastLine = lastSpeechByCharacter.get(characterId);
+  const candidates = lines.filter((line) => line !== lastLine);
+  const pool = candidates.length > 0 ? candidates : lines;
+  const nextLine = pool[Math.floor(Math.random() * pool.length)];
+  lastSpeechByCharacter.set(characterId, nextLine);
+
+  return nextLine;
+}
+
+function speechPositionClass(leftPercentRaw) {
+  const left = Number.parseFloat(leftPercentRaw);
+  if (Number.isNaN(left)) return 'speech-anchor-center';
+  if (left < 28) return 'speech-anchor-left';
+  if (left > 72) return 'speech-anchor-right';
+  return 'speech-anchor-center';
+}
+
+function showSpeechBubble(hostButton, character, line) {
+  clearBubble();
+
+  const style = SPEECH_STYLES[character.id];
+  const bubble = document.createElement('div');
+  bubble.className = `speech-bubble ${speechPositionClass(character.position.left)}`;
+  bubble.dataset.characterId = character.id;
+  bubble.style.setProperty('--bubble-bg', style?.bubble ?? '#1d2f54');
+  bubble.style.setProperty('--bubble-text', style?.text ?? '#eaf4ff');
+  bubble.textContent = line;
+
+  hostButton.appendChild(bubble);
+  activeBubble = bubble;
+
+  bubbleTimer = setTimeout(() => {
+    clearBubble();
+  }, 3200);
+}
+
+function createCharacterButton(character) {
+  const button = document.createElement('button');
+  button.className = `character character-${character.id}`;
+  button.dataset.characterId = character.id;
 function createCharacterButton(character) {
   const button = document.createElement('button');
   button.className = 'character';
@@ -57,6 +119,8 @@ function createCharacterButton(character) {
   button.appendChild(label);
 
   button.addEventListener('click', () => {
+    const speechLine = chooseSpeech(character.id, character.speech ?? DIALOGS[character.id]);
+    showSpeechBubble(button, character, speechLine);
     setDialogue(character.name, DIALOGS[character.id]);
   });
 
@@ -64,6 +128,7 @@ function createCharacterButton(character) {
 }
 
 function renderCharacters() {
+  clearBubble();
   charactersLayer.innerHTML = '';
 
   CHARACTERS[activeRoom].forEach((character) => {
@@ -105,6 +170,7 @@ menuButtons.forEach((button) => {
 if (logo) {
   applyImageWithFallback(
     logo,
+    `${baseUrl}assets/logo/deep-sea-lab-logo.png`,
     `${import.meta.env.BASE_URL}assets/logo/deep-sea-lab-logo.png`,
     FALLBACK_ASSETS.logo,
   );

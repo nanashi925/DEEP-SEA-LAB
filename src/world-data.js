@@ -1,3 +1,5 @@
+const baseUrl = import.meta?.env?.BASE_URL ?? '/';
+const asset = (path) => `${baseUrl}assets/${path}`;
 const asset = (path) => `${import.meta.env.BASE_URL}assets/${path}`;
 
 const pixelAvatar = (label, fg = '#9adfff', bg = '#10263f') => {
@@ -46,6 +48,21 @@ export const ROOMS = {
   },
 };
 
+export const SPEECH_STYLES = {
+  researcherA: {
+    bubble: '#70530f',
+    text: '#f8f3df',
+  },
+  researcherB: {
+    bubble: '#16254f',
+    text: '#ecf2ff',
+  },
+  researcherC: {
+    bubble: '#5a1f2f',
+    text: '#f7ebef',
+  },
+};
+
 export const CHARACTERS = {
   living: [
     {
@@ -53,6 +70,13 @@ export const CHARACTERS = {
       name: '研究員A',
       sprite: asset('characters/researcher-a.png'),
       fallbackSprite: FALLBACK_ASSETS.characters.researcherA,
+      speech: [
+        'お、呼んだか！',
+        '今日は何して遊ぶ？',
+        'いい感じの空気だな！',
+        'ここのんびりできて好きなんだよな',
+        '何か始めるなら付き合うぞ！',
+      ],
       position: {
         left: '18%',
         top: '55%',
@@ -63,6 +87,13 @@ export const CHARACTERS = {
       name: '研究員B',
       sprite: asset('characters/researcher-b.png'),
       fallbackSprite: FALLBACK_ASSETS.characters.researcherB,
+      speech: [
+        '現在の状態は安定している',
+        'その発想は興味深いな',
+        '新しい実験案を考えていた',
+        'もう少し観察してみよう',
+        'それは検証する価値がある',
+      ],
       position: {
         left: '48%',
         top: '42%',
@@ -73,6 +104,13 @@ export const CHARACTERS = {
       name: '研究員C',
       sprite: asset('characters/researcher-c.png'),
       fallbackSprite: FALLBACK_ASSETS.characters.researcherC,
+      speech: [
+        'ふむ、悪くない',
+        '静かでいい場所だ',
+        'さて、次はどう動く',
+        '慌てる必要はない',
+        'いい流れだ、このまま行け',
+      ],
       position: {
         left: '74%',
         top: '58%',
@@ -85,6 +123,13 @@ export const CHARACTERS = {
       name: '研究員B',
       sprite: asset('characters/researcher-b.png'),
       fallbackSprite: FALLBACK_ASSETS.characters.researcherB,
+      speech: [
+        '現在の状態は安定している',
+        'その発想は興味深いな',
+        '新しい実験案を考えていた',
+        'もう少し観察してみよう',
+        'それは検証する価値がある',
+      ],
       position: {
         left: '38%',
         top: '36%',
@@ -95,6 +140,13 @@ export const CHARACTERS = {
       name: '研究員C',
       sprite: asset('characters/researcher-c.png'),
       fallbackSprite: FALLBACK_ASSETS.characters.researcherC,
+      speech: [
+        'ふむ、悪くない',
+        '静かでいい場所だ',
+        'さて、次はどう動く',
+        '慌てる必要はない',
+        'いい流れだ、このまま行け',
+      ],
       position: {
         left: '67%',
         top: '52%',
@@ -105,6 +157,13 @@ export const CHARACTERS = {
       name: '研究員A',
       sprite: asset('characters/researcher-a.png'),
       fallbackSprite: FALLBACK_ASSETS.characters.researcherA,
+      speech: [
+        'お、呼んだか！',
+        '今日は何して遊ぶ？',
+        'いい感じの空気だな！',
+        'ここのんびりできて好きなんだよな',
+        '何か始めるなら付き合うぞ！',
+      ],
       position: {
         left: '18%',
         top: '61%',
