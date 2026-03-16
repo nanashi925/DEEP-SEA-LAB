@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DEEP SEA LAB | 深海ラボ</title>
+    <meta
+      name="description"
+      content="DEEP SEA LAB - 深海ラボの生活区・制御室を探索できるインタラクティブMVP"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230b2946'/%3E%3Ccircle cx='32' cy='32' r='16' fill='%238de9ff'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="glass-panel top-bar">
+        <div class="brand">
+          <img alt="DEEP SEA LAB ロゴ" class="logo" />
+          <div>
+            <p class="brand-main">DEEP SEA LAB</p>
+            <p class="brand-sub">深海ラボ / 居住エリア</p>
+          </div>
+        </div>
+        <nav class="room-menu" aria-label="ルーム切替メニュー">
+          <button class="menu-button is-active" data-room="living">生活区</button>
+          <button class="menu-button" data-room="control">制御室</button>
+        </nav>
+      </header>
+
+      <main class="map-stage-wrap">
+        <section
+          id="mapStage"
+          class="map-stage"
+          role="img"
+          aria-label="深海ラボのマップ"
+        >
+          <div class="ocean-overlay" aria-hidden="true"></div>
+          <div class="water-glimmer" aria-hidden="true"></div>
+          <div class="characters-layer" id="charactersLayer"></div>
+        </section>
+      </main>
+
+      <aside class="glass-panel dialog-panel" aria-live="polite">
+        <p class="speaker" id="speakerName">オペレーター</p>
+        <p id="dialogText">
+          深海ラボへようこそ。研究員をクリックすると会話できます。メニューから部屋を切り替えてください。
+        </p>
+      </aside>
+    </div>
+
+  </body>
+</html>
