@@ -15,10 +15,11 @@ let activeBubble = null;
 let bubbleTimer = null;
 const lastSpeechByCharacter = new Map();
 
+const randomItem = (items) => items[Math.floor(Math.random() * items.length)];
+
 function setDialogue(name, lines) {
   speakerName.textContent = name;
-  const line = lines[Math.floor(Math.random() * lines.length)];
-  dialogText.textContent = line;
+  dialogText.textContent = randomItem(lines);
 }
 
 function applyImageWithFallback(img, primarySrc, fallbackSrc) {
@@ -59,11 +60,9 @@ function chooseSpeech(characterId, lines) {
   if (lines.length <= 1) return lines[0] ?? '';
 
   const lastLine = lastSpeechByCharacter.get(characterId);
-  const candidates = lines.filter((line) => line !== lastLine);
-  const pool = candidates.length > 0 ? candidates : lines;
-  const nextLine = pool[Math.floor(Math.random() * pool.length)];
+  const pool = lines.filter((line) => line !== lastLine);
+  const nextLine = randomItem(pool.length > 0 ? pool : lines);
   lastSpeechByCharacter.set(characterId, nextLine);
-
   return nextLine;
 }
 
@@ -89,9 +88,7 @@ function showSpeechBubble(hostButton, character, line) {
   hostButton.appendChild(bubble);
   activeBubble = bubble;
 
-  bubbleTimer = setTimeout(() => {
-    clearBubble();
-  }, 3200);
+  bubbleTimer = setTimeout(clearBubble, 3200);
 }
 
 function createCharacterButton(character) {
@@ -149,7 +146,6 @@ function switchRoom(targetRoom) {
     brandSub.textContent = ROOMS[activeRoom].label;
     renderCharacters();
     setActiveMenu(activeRoom);
-
     setDialogue('オペレーター', [ROOMS[activeRoom].enterMessage]);
 
     requestAnimationFrame(() => {
@@ -163,11 +159,7 @@ menuButtons.forEach((button) => {
 });
 
 if (logo) {
-  applyImageWithFallback(
-    logo,
-    `${baseUrl}assets/logo/deep-sea-lab-logo.png`,
-    FALLBACK_ASSETS.logo,
-  );
+  applyImageWithFallback(logo, `${baseUrl}assets/logo/deep-sea-lab-logo.png`, FALLBACK_ASSETS.logo);
 }
 
 applyRoomBackground(ROOMS[activeRoom]);

@@ -64,6 +64,13 @@ npm run dev
 
 > 公開URLは通常 `https://<GitHubユーザー名>.github.io/DEEP-SEA-LAB/` 形式です。
 
+
+## マージ運用メモ（競合を起こしにくくするため）
+
+- `src/world-data.js` は「定数定義 → `makeCharacter` → `CHARACTERS`」の順で統一しています。
+- キャラ情報を変更するときは `CHARACTER_SPRITE_PATH` / `TAP_SPEECH` / `CHARACTERS` の3箇所だけ編集してください。
+- 競合解消時に `Accept both changes` を使う場合は、`src/main.js` と `src/style.css` の吹き出しブロックが重複していないか必ず確認してください。
+
 ## 画像差し替え方法
 
 ### 1) 背景画像

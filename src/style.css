@@ -191,6 +191,7 @@ body::before {
   white-space: nowrap;
 }
 
+/* Bubble UI (kept in one block to reduce merge conflicts) */
 .speech-bubble {
   position: absolute;
   bottom: calc(100% + 18px);
@@ -243,7 +244,6 @@ body::before {
 .speech-anchor-right::after {
   right: 18px;
 }
-
 
 .dialog-panel {
   padding: 0.9rem 1rem 1.05rem;
