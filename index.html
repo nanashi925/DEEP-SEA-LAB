@@ -6,11 +6,7 @@
     <title>DEEP SEA LAB | 深海ラボ</title>
     <meta
       name="description"
-      content="DEEP SEA LAB - 深海ラボの生活区・制御室を探索できるインタラクティブMVP"
-    />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230b2946'/%3E%3Ccircle cx='32' cy='32' r='16' fill='%238de9ff'/%3E%3C/svg%3E"
+      content="DEEP SEA LAB - 深海ラボの拠点MVP（背景・部屋切替・A/B/C表示枠・タップ反応の受け口）"
     />
     <link rel="stylesheet" href="/src/style.css" />
   </head>
@@ -18,38 +14,32 @@
     <div class="app-shell">
       <header class="glass-panel top-bar">
         <div class="brand">
-          <img alt="DEEP SEA LAB ロゴ" class="logo" />
-          <div>
-            <p class="brand-main">DEEP SEA LAB</p>
-            <p class="brand-sub">深海ラボ / 居住エリア</p>
-          </div>
+          <p class="brand-main">DEEP SEA LAB</p>
+          <p class="brand-sub">深海ラボ / 拠点MVP</p>
         </div>
-        <nav class="room-menu" aria-label="ルーム切替メニュー">
+        <nav class="room-menu" aria-label="部屋切替">
           <button class="menu-button is-active" data-room="living">生活区</button>
           <button class="menu-button" data-room="control">制御室</button>
         </nav>
       </header>
 
       <main class="map-stage-wrap">
-        <section
-          id="mapStage"
-          class="map-stage"
-          role="img"
-          aria-label="深海ラボのマップ"
-        >
+        <section id="mapStage" class="map-stage" role="img" aria-label="深海ラボ背景">
           <div class="ocean-overlay" aria-hidden="true"></div>
-          <div class="water-glimmer" aria-hidden="true"></div>
-          <div class="characters-layer" id="charactersLayer"></div>
+          <div class="frames-layer" id="framesLayer">
+            <button class="frame frame-a" data-character="A" aria-label="研究員A枠">A</button>
+            <button class="frame frame-b" data-character="B" aria-label="研究員B枠">B</button>
+            <button class="frame frame-c" data-character="C" aria-label="研究員C枠">C</button>
+          </div>
         </section>
       </main>
 
-      <aside class="glass-panel dialog-panel" aria-live="polite">
-        <p class="speaker" id="speakerName">オペレーター</p>
-        <p id="dialogText">
-          深海ラボへようこそ。研究員をクリックすると会話できます。メニューから部屋を切り替えてください。
-        </p>
+      <aside class="glass-panel status-panel" aria-live="polite">
+        <p class="status-title">システムログ</p>
+        <p id="statusText">初期化完了。部屋を切替、または A/B/C をタップしてください。</p>
       </aside>
     </div>
 
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
