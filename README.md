@@ -19,6 +19,7 @@ npm run dev
 - 生活区/制御室の背景切り替え（フェード演出付き）
 - 研究員 A/B/C のドット絵タップでキャラ色付き吹き出し会話（数秒で自動消去）
 - 研究員タップ時に下部会話ボックスも更新
+- 研究員 A/B/C のドット絵クリックで会話表示
 - 半透明ガラス風 UI + 青い発光演出
 - 軽量な水中ゆらぎ/反射エフェクト
 - `/public/assets/` が空でも、SVG プレースホルダーで表示可能
@@ -63,15 +64,6 @@ npm run dev
 - もしくは **Settings > Pages** の「Your site is live at ...」から確認
 
 > 公開URLは通常 `https://<GitHubユーザー名>.github.io/DEEP-SEA-LAB/` 形式です。
-
-
-## 競合解消ポリシー（手動Resolve不要を目指す）
-
-- 最新mainの取り込み後チェック: `README.md / src/main.js / src/style.css / src/world-data.js` の4ファイルで競合マーカーが0件であること。
-- `src/world-data.js` は **`TAP_SPEECH` → `CHARACTER_SPRITE_PATH` → `makeCharacter` → `CHARACTERS`** の順序を維持します。
-- `src/main.js` はキャラタップ処理を `createCharacterButton`、部屋遷移処理を `switchRoom` に集約して編集します。
-- `src/style.css` の吹き出しは `MERGE-SAFE` コメントで囲まれたブロック単位で扱います。
-- 競合時は `Accept both changes` を使わず、ブロック単位で片側採用→必要差分のみ追記します。
 
 ## 画像差し替え方法
 
