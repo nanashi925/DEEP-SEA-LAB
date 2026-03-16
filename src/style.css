@@ -295,6 +295,7 @@ body::before {
   }
 }
 
+/* MERGE-SAFE: keep keyframes declared once */
 @keyframes bubble-pop {
   from {
     opacity: 0;

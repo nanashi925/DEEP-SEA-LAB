@@ -1,4 +1,4 @@
-// MERGE-SAFE DATA ORDER: constants -> speech map -> sprite map -> factory -> exports
+// MERGE-SAFE DATA ORDER: constants -> styles -> TAP_SPEECH -> sprite map -> factory -> exports
 const baseUrl = import.meta?.env?.BASE_URL ?? '/';
 const asset = (path) => `${baseUrl}assets/${path}`;
 

@@ -11,6 +11,7 @@ const logo = document.querySelector('.logo');
 
 const baseUrl = import.meta?.env?.BASE_URL ?? '/';
 
+// MERGE-SAFE STATE: keep these declarations unique (no duplicates)
 let activeRoom = 'living';
 let activeBubble = null;
 let bubbleTimer = null;

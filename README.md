@@ -67,6 +67,7 @@ npm run dev
 
 ## 競合解消ポリシー（手動Resolve不要を目指す）
 
+- 最新mainの取り込み後チェック: `README.md / src/main.js / src/style.css / src/world-data.js` の4ファイルで競合マーカーが0件であること。
 - `src/world-data.js` は **`TAP_SPEECH` → `CHARACTER_SPRITE_PATH` → `makeCharacter` → `CHARACTERS`** の順序を維持します。
 - `src/main.js` はキャラタップ処理を `createCharacterButton`、部屋遷移処理を `switchRoom` に集約して編集します。
 - `src/style.css` の吹き出しは `MERGE-SAFE` コメントで囲まれたブロック単位で扱います。
