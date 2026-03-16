@@ -191,6 +191,7 @@ body::before {
   white-space: nowrap;
 }
 
+/* MERGE-SAFE: speech bubble block start */
 /* Bubble UI (kept in one block to reduce merge conflicts) */
 .speech-bubble {
   position: absolute;
@@ -244,6 +245,7 @@ body::before {
 .speech-anchor-right::after {
   right: 18px;
 }
+/* MERGE-SAFE: speech bubble block end */
 
 .dialog-panel {
   padding: 0.9rem 1rem 1.05rem;

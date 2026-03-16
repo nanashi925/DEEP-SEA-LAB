@@ -15,7 +15,7 @@ let activeBubble = null;
 let bubbleTimer = null;
 const lastSpeechByCharacter = new Map();
 
-const randomItem = (items) => items[Math.floor(Math.random() * items.length)];
+const randomItem = (items) => (items.length ? items[Math.floor(Math.random() * items.length)] : '');
 
 function setDialogue(name, lines) {
   speakerName.textContent = name;

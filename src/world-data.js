@@ -53,6 +53,7 @@ export const SPEECH_STYLES = {
   researcherC: { bubble: '#5a1f2f', text: '#f7ebef' },
 };
 
+// MERGE-SAFE DATA BLOCK: keep this order to reduce conflict churn
 const TAP_SPEECH = {
   researcherA: [
     'お、呼んだか！',

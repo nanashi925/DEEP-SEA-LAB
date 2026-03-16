@@ -71,6 +71,14 @@ npm run dev
 - キャラ情報を変更するときは `CHARACTER_SPRITE_PATH` / `TAP_SPEECH` / `CHARACTERS` の3箇所だけ編集してください。
 - 競合解消時に `Accept both changes` を使う場合は、`src/main.js` と `src/style.css` の吹き出しブロックが重複していないか必ず確認してください。
 
+
+## 競合を起こしにくい更新ルール（PR運用）
+
+- `src/main.js` はイベント処理を `createCharacterButton` / `switchRoom` のみで更新する。
+- `src/style.css` の吹き出しは `MERGE-SAFE` コメントで囲まれた範囲を単位で扱う。
+- `src/world-data.js` は `TAP_SPEECH` → `CHARACTER_SPRITE_PATH` → `makeCharacter` の順序を維持する。
+- 競合時に `Accept both changes` を使わず、上記3ファイルは「ブロック単位で片方を採用→必要差分だけ追記」する。
+
 ## 画像差し替え方法
 
 ### 1) 背景画像
