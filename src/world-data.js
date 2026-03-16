@@ -1,5 +1,6 @@
 const baseUrl = import.meta?.env?.BASE_URL ?? '/';
 const asset = (path) => `${baseUrl}assets/${path}`;
+const asset = (path) => `${import.meta.env.BASE_URL}assets/${path}`;
 
 const pixelAvatar = (label, fg = '#9adfff', bg = '#10263f') => {
   const svg = `

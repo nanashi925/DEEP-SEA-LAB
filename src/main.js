@@ -1,4 +1,5 @@
 import { CHARACTERS, DIALOGS, FALLBACK_ASSETS, ROOMS, SPEECH_STYLES } from './world-data.js';
+import { CHARACTERS, DIALOGS, FALLBACK_ASSETS, ROOMS } from './world-data.js';
 
 const mapStage = document.getElementById('mapStage');
 const charactersLayer = document.getElementById('charactersLayer');
@@ -14,6 +15,7 @@ let activeRoom = 'living';
 let activeBubble = null;
 let bubbleTimer = null;
 const lastSpeechByCharacter = new Map();
+let activeRoom = 'living';
 
 function setDialogue(name, lines) {
   speakerName.textContent = name;
@@ -98,6 +100,9 @@ function createCharacterButton(character) {
   const button = document.createElement('button');
   button.className = `character character-${character.id}`;
   button.dataset.characterId = character.id;
+function createCharacterButton(character) {
+  const button = document.createElement('button');
+  button.className = 'character';
   button.style.left = character.position.left;
   button.style.top = character.position.top;
   button.setAttribute('aria-label', `${character.name}と話す`);
@@ -166,6 +171,7 @@ if (logo) {
   applyImageWithFallback(
     logo,
     `${baseUrl}assets/logo/deep-sea-lab-logo.png`,
+    `${import.meta.env.BASE_URL}assets/logo/deep-sea-lab-logo.png`,
     FALLBACK_ASSETS.logo,
   );
 }
