@@ -65,19 +65,12 @@ npm run dev
 > 公開URLは通常 `https://<GitHubユーザー名>.github.io/DEEP-SEA-LAB/` 形式です。
 
 
-## マージ運用メモ（競合を起こしにくくするため）
+## 競合解消ポリシー（手動Resolve不要を目指す）
 
-- `src/world-data.js` は「定数定義 → `makeCharacter` → `CHARACTERS`」の順で統一しています。
-- キャラ情報を変更するときは `CHARACTER_SPRITE_PATH` / `TAP_SPEECH` / `CHARACTERS` の3箇所だけ編集してください。
-- 競合解消時に `Accept both changes` を使う場合は、`src/main.js` と `src/style.css` の吹き出しブロックが重複していないか必ず確認してください。
-
-
-## 競合を起こしにくい更新ルール（PR運用）
-
-- `src/main.js` はイベント処理を `createCharacterButton` / `switchRoom` のみで更新する。
-- `src/style.css` の吹き出しは `MERGE-SAFE` コメントで囲まれた範囲を単位で扱う。
-- `src/world-data.js` は `TAP_SPEECH` → `CHARACTER_SPRITE_PATH` → `makeCharacter` の順序を維持する。
-- 競合時に `Accept both changes` を使わず、上記3ファイルは「ブロック単位で片方を採用→必要差分だけ追記」する。
+- `src/world-data.js` は **`TAP_SPEECH` → `CHARACTER_SPRITE_PATH` → `makeCharacter` → `CHARACTERS`** の順序を維持します。
+- `src/main.js` はキャラタップ処理を `createCharacterButton`、部屋遷移処理を `switchRoom` に集約して編集します。
+- `src/style.css` の吹き出しは `MERGE-SAFE` コメントで囲まれたブロック単位で扱います。
+- 競合時は `Accept both changes` を使わず、ブロック単位で片側採用→必要差分のみ追記します。
 
 ## 画像差し替え方法
 

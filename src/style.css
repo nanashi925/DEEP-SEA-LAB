@@ -191,6 +191,7 @@ body::before {
   white-space: nowrap;
 }
 
+/* MERGE-SAFE STYLE NOTE: keep this block contiguous during merges */
 /* MERGE-SAFE: speech bubble block start */
 /* Bubble UI (kept in one block to reduce merge conflicts) */
 .speech-bubble {

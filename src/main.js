@@ -1,3 +1,4 @@
+// MERGE-SAFE ENTRY: keep imports single-line and unique
 import { CHARACTERS, DIALOGS, FALLBACK_ASSETS, ROOMS, SPEECH_STYLES } from './world-data.js';
 
 const mapStage = document.getElementById('mapStage');
