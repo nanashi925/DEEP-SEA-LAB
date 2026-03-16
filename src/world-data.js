@@ -1,6 +1,6 @@
+// MERGE-SAFE DATA ORDER: constants -> styles -> TAP_SPEECH -> sprite map -> factory -> exports
 const baseUrl = import.meta?.env?.BASE_URL ?? '/';
 const asset = (path) => `${baseUrl}assets/${path}`;
-const asset = (path) => `${import.meta.env.BASE_URL}assets/${path}`;
 
 const pixelAvatar = (label, fg = '#9adfff', bg = '#10263f') => {
   const svg = `
@@ -49,126 +49,61 @@ export const ROOMS = {
 };
 
 export const SPEECH_STYLES = {
-  researcherA: {
-    bubble: '#70530f',
-    text: '#f8f3df',
-  },
-  researcherB: {
-    bubble: '#16254f',
-    text: '#ecf2ff',
-  },
-  researcherC: {
-    bubble: '#5a1f2f',
-    text: '#f7ebef',
-  },
+  researcherA: { bubble: '#70530f', text: '#f8f3df' },
+  researcherB: { bubble: '#16254f', text: '#ecf2ff' },
+  researcherC: { bubble: '#5a1f2f', text: '#f7ebef' },
 };
+
+// MERGE-SAFE DATA BLOCK: keep this order to reduce conflict churn
+const TAP_SPEECH = {
+  researcherA: [
+    'お、呼んだか！',
+    '今日は何して遊ぶ？',
+    'いい感じの空気だな！',
+    'ここのんびりできて好きなんだよな',
+    '何か始めるなら付き合うぞ！',
+  ],
+  researcherB: [
+    '現在の状態は安定している',
+    'その発想は興味深いな',
+    '新しい実験案を考えていた',
+    'もう少し観察してみよう',
+    'それは検証する価値がある',
+  ],
+  researcherC: [
+    'ふむ、悪くない',
+    '静かでいい場所だ',
+    'さて、次はどう動く',
+    '慌てる必要はない',
+    'いい流れだ、このまま行け',
+  ],
+};
+
+const CHARACTER_SPRITE_PATH = {
+  researcherA: 'characters/researcher-a.png',
+  researcherB: 'characters/researcher-b.png',
+  researcherC: 'characters/researcher-c.png',
+};
+
+const makeCharacter = (id, name, left, top) => ({
+  id,
+  name,
+  sprite: asset(CHARACTER_SPRITE_PATH[id]),
+  fallbackSprite: FALLBACK_ASSETS.characters[id],
+  speech: TAP_SPEECH[id],
+  position: { left, top },
+});
 
 export const CHARACTERS = {
   living: [
-    {
-      id: 'researcherA',
-      name: '研究員A',
-      sprite: asset('characters/researcher-a.png'),
-      fallbackSprite: FALLBACK_ASSETS.characters.researcherA,
-      speech: [
-        'お、呼んだか！',
-        '今日は何して遊ぶ？',
-        'いい感じの空気だな！',
-        'ここのんびりできて好きなんだよな',
-        '何か始めるなら付き合うぞ！',
-      ],
-      position: {
-        left: '18%',
-        top: '55%',
-      },
-    },
-    {
-      id: 'researcherB',
-      name: '研究員B',
-      sprite: asset('characters/researcher-b.png'),
-      fallbackSprite: FALLBACK_ASSETS.characters.researcherB,
-      speech: [
-        '現在の状態は安定している',
-        'その発想は興味深いな',
-        '新しい実験案を考えていた',
-        'もう少し観察してみよう',
-        'それは検証する価値がある',
-      ],
-      position: {
-        left: '48%',
-        top: '42%',
-      },
-    },
-    {
-      id: 'researcherC',
-      name: '研究員C',
-      sprite: asset('characters/researcher-c.png'),
-      fallbackSprite: FALLBACK_ASSETS.characters.researcherC,
-      speech: [
-        'ふむ、悪くない',
-        '静かでいい場所だ',
-        'さて、次はどう動く',
-        '慌てる必要はない',
-        'いい流れだ、このまま行け',
-      ],
-      position: {
-        left: '74%',
-        top: '58%',
-      },
-    },
+    makeCharacter('researcherA', '研究員A', '18%', '55%'),
+    makeCharacter('researcherB', '研究員B', '48%', '42%'),
+    makeCharacter('researcherC', '研究員C', '74%', '58%'),
   ],
   control: [
-    {
-      id: 'researcherB',
-      name: '研究員B',
-      sprite: asset('characters/researcher-b.png'),
-      fallbackSprite: FALLBACK_ASSETS.characters.researcherB,
-      speech: [
-        '現在の状態は安定している',
-        'その発想は興味深いな',
-        '新しい実験案を考えていた',
-        'もう少し観察してみよう',
-        'それは検証する価値がある',
-      ],
-      position: {
-        left: '38%',
-        top: '36%',
-      },
-    },
-    {
-      id: 'researcherC',
-      name: '研究員C',
-      sprite: asset('characters/researcher-c.png'),
-      fallbackSprite: FALLBACK_ASSETS.characters.researcherC,
-      speech: [
-        'ふむ、悪くない',
-        '静かでいい場所だ',
-        'さて、次はどう動く',
-        '慌てる必要はない',
-        'いい流れだ、このまま行け',
-      ],
-      position: {
-        left: '67%',
-        top: '52%',
-      },
-    },
-    {
-      id: 'researcherA',
-      name: '研究員A',
-      sprite: asset('characters/researcher-a.png'),
-      fallbackSprite: FALLBACK_ASSETS.characters.researcherA,
-      speech: [
-        'お、呼んだか！',
-        '今日は何して遊ぶ？',
-        'いい感じの空気だな！',
-        'ここのんびりできて好きなんだよな',
-        '何か始めるなら付き合うぞ！',
-      ],
-      position: {
-        left: '18%',
-        top: '61%',
-      },
-    },
+    makeCharacter('researcherB', '研究員B', '38%', '36%'),
+    makeCharacter('researcherC', '研究員C', '67%', '52%'),
+    makeCharacter('researcherA', '研究員A', '18%', '61%'),
   ],
 };
 
